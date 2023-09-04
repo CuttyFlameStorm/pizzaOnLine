@@ -2,7 +2,28 @@
 body{
     background-color: bisque;
     text-align: center;
+    
+}
+
+a {
     text-decoration: none;
+    list-style: none;
+    background-color: greenyellow;
+    padding: 5px;
+}
+.btn_ajout{
+    background-color: greenyellow;
+    border-radius: 8px;
+    box-shadow: 5px 4px 10px rgb(2, 61, 41);
+    transition: all 0.3s;
+}
+.btn_ajout:hover{
+    transform: scale(0.95);
+    transition: all 0.3s;
+    border-color: wheat;
+}
+.btn_ajout:hover a{
+    color: darkblue;
 }
 
 .titre_page{
