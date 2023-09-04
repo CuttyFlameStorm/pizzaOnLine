@@ -1,0 +1,21 @@
+
+body{
+    background-color: bisque;
+    text-align: center;
+    text-decoration: none;
+}
+
+.titre_page{
+    color: chocolate;
+}
+.titre_page_admin{
+    color: red;
+}
+
+
+.img_pizza{
+    width: 250px;
+    height: 250px;
+    border: rgb(184, 121, 5) 3px solid;
+    border-radius: 5px;
+}
