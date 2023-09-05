@@ -10,6 +10,7 @@
     <title>carte des produits</title>
 </head>
 <body>
+    <div class="overlay"></div>
     
 
     <h1 class="logo_societe">ENIPIZZ</h1>
@@ -66,37 +67,30 @@
                     <th>Nom</th>
                     <th>Description</th> 
                     <th>aperçu pizza</th>         
-                    <th></th>                  
+                    <th></th>  
+                    <th></th>                
                   
                 </thead>
                 <tbody>
-                    <tr th:each="produit : ${produits}" >
-                        <!-- <form th:action="@{/carte/supprimerpizza}" method="POST" th:object="${produit}" >
-                            <td th:text="${produit.id}" ></td>
-                            <td th:text="${produit.prix}" ></td>
-                            <td th:text="${produit.nom}"></td>
-                            <td th:text="${produit.description}">
-                            </td>
-                            <td>
-                                <img class="img_pizza" th:src="@{'/img/pizza' + ${produit.id} + '.jpg'}" alt="illustration de la pizza" />
-                            </td>
-                            <td>
-                                    <button type="submit" class="btn_ajout"><a th:href="@{/carte/supprimerpizza?}+${produit.id}">supprimer</a></button> 
-                            </td>
-                        </form> -->
-                        <form th:action="@{/carte/supprimerpizza}" method="POST">
-                            <input type="hidden" name="id" th:value="${produit.id}" />
-                            <td th:text="${produit.id}"></td>
-                            <td th:text="${produit.prix}"></td>
-                            <td th:text="${produit.nom}"></td>
-                            <td th:text="${produit.description}"></td>
-                            <td>
-                                <img class="img_pizza" th:src="@{'/img/pizza' + ${produit.id} + '.jpg'}" alt="illustration de la pizza" />
-                            </td>
-                            <td>
-                                <button type="submit" class="btn_ajout">supprimer</button>
-                            </td>
-                        </form>
+                    <tr th:each="produit : ${produits}">
+                        <td th:text="${produit.id}"></td>
+                        <td th:text="${produit.prix} + ' € '"></td>
+                        <td th:text="${produit.nom}"></td>
+                        <td th:text="${produit.description}"></td>
+                        <td>
+                            <img class="img_pizza" th:src="@{'/img/pizza' + ${produit.id} + '.jpg'}" alt="illustration de la pizza" />
+                        </td>
+                        <td>
+                            <!-- Formulaire pour supprimer le produit -->
+                            <form th:action="@{/carte/supprimerpizza}" method="POST">
+                                <input type="hidden" name="id" th:value="${produit.id}" />
+                                <button type="submit" class="btn_suppr">supprimer</button>
+                            </form>
+                        </td>
+                        <td>
+                            <!-- envoi de l'ID du produit en paramètre pour la page de modification -->
+                            <a th:href="@{/carte/modifierpizza(id=${produit.id})}" class="btn_modifier">modifier</a>
+                        </td>
                     </tr>
 
                 </tbody>

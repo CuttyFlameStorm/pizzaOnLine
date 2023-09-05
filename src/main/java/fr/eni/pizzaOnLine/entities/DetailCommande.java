@@ -27,7 +27,7 @@ public class DetailCommande implements Serializable {
 	private Integer quantite;
 	
 	@ManyToOne
-    private Produit produits;
+    private Produit produit;
 
 	
 	

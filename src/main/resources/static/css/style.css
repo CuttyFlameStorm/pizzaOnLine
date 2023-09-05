@@ -1,23 +1,94 @@
 
-body{
+/* body{
     background-color: bisque;
     text-align: center;
+    background-image: src=bg_four_pizza.jpg;
     
+} */
+
+body {
+    background-color: bisque;
+    text-align: center;
+    background-image: url('/img/bg_four_pizza.jpg');
+    background-size: cover; /* Pour ajuster l'image de fond à la taille de l'écran */
+    background-repeat: no-repeat; /* Pour éviter la répétition de l'image de fond */
+    background-attachment: fixed; /* Pour empêcher le défilement de l'image de fond */
+    color: wheat; /* Couleur du texte */
+    font-family: Arial, sans-serif; /* Police de caractères */
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Couleur de fond sombre avec une opacité de 70% */
+    pointer-events: none; /* Permet aux clics de passer à travers l'overlay */
+    z-index: -10; /* Place l'overlay au-dessus du contenu */
 }
 
 a {
     text-decoration: none;
     list-style: none;
     background-color: greenyellow;
-    padding: 5px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 8px;
 }
+
+.green_word {
+    color: greenyellow;
+    text-shadow: 1px 1px 3px burlywood;
+}
+.panier{
+    width: 100%;
+    padding: 15px;
+    height: auto;
+    /* background-color: brown; */
+    text-align: center;
+    align-items: center;
+}
+.adroite{
+    width: 200px;
+    height: auto;
+    padding: 5px;
+    border-radius: 8px;
+    margin-left: auto;
+    margin-right: 0 !important;
+    transition: all 0.2s;
+}
+.adroite:hover{
+    transform: scale(1.2);
+    transition: all 0.2s;
+}
+.custom-badge {
+    background-color: #ff5733; 
+    color: #fff; 
+    font-size: 14px; 
+    
+}
+
 .btn_ajout{
     background-color: greenyellow;
     border-radius: 8px;
     box-shadow: 5px 4px 10px rgb(2, 61, 41);
     transition: all 0.3s;
 }
-.btn_ajout:hover{
+.btn_suppr{
+    background-color: greenyellow;
+    border-radius: 8px;
+    box-shadow: 5px 4px 10px rgb(2, 61, 41);
+    transition: all 0.3s;
+}
+.btn_modifier{
+    background-color: rgb(196, 86, 13);
+    border-radius: 8px;
+    box-shadow: 5px 4px 10px rgb(2, 61, 41);
+    transition: all 0.3s;
+    color: wheat;
+}
+.btn_ajout:hover, .btn_suppr:hover, .btn_modifier:hover{
     transform: scale(0.95);
     transition: all 0.3s;
     border-color: wheat;

@@ -10,33 +10,36 @@
     <title>carte des produits</title>
 </head>
 <body>
+    <div class="overlay"></div>
     
 
     <h1 class="logo_societe">ENIPIZZ</h1>
     <h1 class="titre_page">COMANDER</h1>
-    <h2><a th:href="@{/commander}">passer commande</a></h2>
-    <span>
-        <a th:href="@{/panier}" style="text-decoration: none;">
-            <i class="fas fa-shopping-cart"></i> PANIER 
-        </a>
-    </span>
+   
+    <div class="panier">
+        <div class="adroite">
+            <a th:href="@{/panier}" style="text-decoration: none;">
+                <i class="fas fa-shopping-cart"></i>  Votre PANIER
+                <span class="badge badge-pill custom-badge" th:text="${quantiteDansPanier}"></span>
+            </a>
+        </div>
+    </div>
 
     <div>
         <h2 class="nom_pizza">Nom PIZZA</h2>
     </div>
     <div>
         <img class="img_pizza" src="/img/pizza1.jpg" alt="illustration de la pizza 1">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ducimus reprehenderit quae id cum nulla ipsum atque earum molestiae, voluptatibus ut perspiciatis odio dolores, aspernatur excepturi corporis ratione adipisci eos.
-        Numquam fugit vero serferendis qute aut velit?
-        </p>
-        <span>prix : ...</span>
+        
+        <!-- <span>prix : ...</span>
         <span>quantite :  ➖ ... ➕ </span>
-        <button>Ajouter</button>
+        <button>Ajouter</button> -->
     </div>
     
     <main>
             <div class="row text-center mt-4">
-                <h1>Liste des pizzas disponible et commandables</h1>
+                <h1>Liste des pizzas disponibles et commandables</h1>
+                <h2 class="green_word">Nous effectuons les livraisons en 45 minutes !</h2>
             </div>
             <div class="row my-5">
                 <div class="col-8 offset-2">
@@ -51,21 +54,20 @@
                         </thead>
                         <tbody>
                             <tr th:each="produit : ${produits}" >
-                                <td th:text="${produit.prix}" ></td>
-                                <td th:text="${produit.nom}"></td>
-                                <td th:text="${produit.description}">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ducimus reprehenderit quae id cum nulla ipsum atque earum molestiae, voluptatibus ut perspiciatis odio dolores, aspernatur excepturi corporis ratione adipisci eos.
-                                        Numquam fugit vero serferendis qute aut velit?
-                                    </p>
-                                </td>
-                                <td>
-                                    <img class="img_pizza" th:src="@{'/img/pizza' + ${produit.id} + '.jpg'}" alt="illustration de la pizza" />
-                                </td>
-                                <td>
-                                    <button class="btn_ajout"><a th:href="@{/panier}">Ajouter</a></button>
-                                </td>
-                                
+                                <form th:action="@{/panier/ajouter}" method="POST">
+                                    <input type="hidden" name="produitId" th:value="${produit.id}" />
+                                    <td th:text="${produit.prix} + ' € '"></td>
+                                    <td th:text="${produit.nom}"></td>
+                                    <td th:text="${produit.description}"></td>
+                                    <td>
+                                        <img class="img_pizza" th:src="@{'/img/pizza' + ${produit.id} + '.jpg'}" alt="illustration de la pizza" />
+                                    </td>
+                                    <td>
+                                        <button type="submit" class="btn_ajout">Ajouter</button>
+                                    </td>
+                                </form>
                             </tr>
+                            
                         </tbody>
                     </table>
                 </div>
