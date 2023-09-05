@@ -1,44 +1,36 @@
 package fr.eni.pizzaOnLine.entities;
 
 import java.io.Serializable;
+import java.util.List;
+
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class DetailCommande implements Serializable {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	@Id @GeneratedValue
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Integer quantite;
-
 	
-//	getters et setters 
-	public Integer getQuantite() {
-		return quantite;
-	}
+	@ManyToOne
+    private Produit produits;
 
-	public void setQuantite(Integer quantite) {
-		this.quantite = quantite;
-	}
-
-	
-//	constructor avec et sans parametres
-	public DetailCommande() {
-		super();
-	}
-
-	public DetailCommande(Integer quantite) {
-		super();
-		this.quantite = quantite;
-	}
-	
-	
 	
 	
 }
