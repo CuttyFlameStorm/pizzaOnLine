@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-
+import fr.eni.pizzaOnLine.dao.ProduitRepository;
 import fr.eni.pizzaOnLine.entities.Produit;
 import fr.eni.pizzaOnLine.service.ProduitService;
 
@@ -23,6 +24,8 @@ public class AdminController {
 
 	@Autowired
 	private ProduitService produitService;
+	@Autowired
+	private ProduitRepository produitRepo;
 	
 	private String Messagesaved = "produit ajouté avec succès";
 	 @ModelAttribute("Messagesaved")
@@ -34,20 +37,29 @@ public class AdminController {
 	@GetMapping
 	public String ajotuerPizzaForm(Model model) {
 		model.addAttribute("produit", new Produit() );
+		model.addAttribute("produits", produitService.consulterProduits());	
 		return "carte";
 	}
-	
-	
-	
+
 	@PostMapping("/ajouterPizza")
 	public String ajouterTraitement(
 	        @ModelAttribute Produit produit,
 	        Model model) {
 		
-		produitService.sauvegarderProduit(produit);
+//		produitService.sauvegarderProduit(produit);
+		produitRepo.save(produit);
 		model.addAttribute("Messagesaved", getMessagesaved() );
 		model.addAttribute("produit", new Produit() );
 		return "redirect:/carte";
+	}
+	
+
+	
+	@PostMapping("/supprimerpizza")
+	public String supprimerPizza(@RequestParam("id") Long id, Model model) {
+	    produitRepo.deleteById(id);
+	    model.addAttribute("Messagesaved", getMessagesaved());
+	    return "redirect:/carte";
 	}
 	
 	

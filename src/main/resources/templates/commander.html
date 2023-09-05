@@ -42,7 +42,7 @@
                 <div class="col-8 offset-2">
                     <table class="table table-primary table-striped">
                         <thead>
-                            <th>Réference</th>
+                            <th>Tarif</th>
                             <th>Nom</th>
                             <th>Description</th> 
                             <th>aperçu pizza</th>         
@@ -51,7 +51,7 @@
                         </thead>
                         <tbody>
                             <tr th:each="produit : ${produits}" >
-                                <td th:text="${produit.id}" ></td>
+                                <td th:text="${produit.prix}" ></td>
                                 <td th:text="${produit.nom}"></td>
                                 <td th:text="${produit.description}">
                                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ducimus reprehenderit quae id cum nulla ipsum atque earum molestiae, voluptatibus ut perspiciatis odio dolores, aspernatur excepturi corporis ratione adipisci eos.
@@ -62,7 +62,7 @@
                                     <img class="img_pizza" th:src="@{'/img/pizza' + ${produit.id} + '.jpg'}" alt="illustration de la pizza" />
                                 </td>
                                 <td>
-                                    <button class="btn_ajout"><a th:href="@{/panier}">Ajouter</ath:href></a></button>
+                                    <button class="btn_ajout"><a th:href="@{/panier}">Ajouter</a></button>
                                 </td>
                                 
                             </tr>

@@ -28,13 +28,21 @@
                     <div class="mb-3">
                         <label for="nom" class="form-label" >Nom de la nouvelle Pizza</label>
                         <input type="text" class="form-control" id="nom" th:field="*{nom}" >
-                     
                     </div>     
 
                     <div class="mb-3">
                         <label for="desc" class="form-label">Description</label>
                         <textarea class="form-control" id="desc" rows="4" th:field="*{description}" ></textarea>
-                  
+                    </div> 
+
+                    <div class="mb-3">
+                        <label for="prix" class="form-label" >Prix de vente</label>
+                        <input type="text" class="form-control" id="prix" th:field="*{prix}" >
+                    </div> 
+
+                    <div class="mb-3">
+                        <label for="urlimage" class="form-label" >Nom de l'image</label>
+                        <input type="text" class="form-control" id="prix" th:field="*{urlimage}" >
                     </div> 
                
                      
@@ -44,10 +52,57 @@
                     </div>                    
                 </form>
 
-                <h3 th:text="${Messagesaved}"></h3>
+                <!-- <h3 th:text="${Messagesaved}"></h3> -->
             </div>
         </div>
     </main>
+
+    <div class="row my-5">
+        <div class="col-8 offset-2">
+            <table class="table table-primary table-striped">
+                <thead>
+                    <th>Réference</th>
+                    <th>Tarif</th>
+                    <th>Nom</th>
+                    <th>Description</th> 
+                    <th>aperçu pizza</th>         
+                    <th></th>                  
+                  
+                </thead>
+                <tbody>
+                    <tr th:each="produit : ${produits}" >
+                        <!-- <form th:action="@{/carte/supprimerpizza}" method="POST" th:object="${produit}" >
+                            <td th:text="${produit.id}" ></td>
+                            <td th:text="${produit.prix}" ></td>
+                            <td th:text="${produit.nom}"></td>
+                            <td th:text="${produit.description}">
+                            </td>
+                            <td>
+                                <img class="img_pizza" th:src="@{'/img/pizza' + ${produit.id} + '.jpg'}" alt="illustration de la pizza" />
+                            </td>
+                            <td>
+                                    <button type="submit" class="btn_ajout"><a th:href="@{/carte/supprimerpizza?}+${produit.id}">supprimer</a></button> 
+                            </td>
+                        </form> -->
+                        <form th:action="@{/carte/supprimerpizza}" method="POST">
+                            <input type="hidden" name="id" th:value="${produit.id}" />
+                            <td th:text="${produit.id}"></td>
+                            <td th:text="${produit.prix}"></td>
+                            <td th:text="${produit.nom}"></td>
+                            <td th:text="${produit.description}"></td>
+                            <td>
+                                <img class="img_pizza" th:src="@{'/img/pizza' + ${produit.id} + '.jpg'}" alt="illustration de la pizza" />
+                            </td>
+                            <td>
+                                <button type="submit" class="btn_ajout">supprimer</button>
+                            </td>
+                        </form>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     
     

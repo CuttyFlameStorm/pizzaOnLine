@@ -9,6 +9,7 @@ public interface ProduitService {
 
 	List<Produit> consulterProduits();
 	void sauvegarderProduit(Produit produit);
+	
 
 	
 }
