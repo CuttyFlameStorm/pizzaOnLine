@@ -78,7 +78,7 @@
                         <td th:text="${produit.nom}"></td>
                         <td th:text="${produit.description}"></td>
                         <td>
-                            <img class="img_pizza" th:src="@{'/img/pizza' + ${produit.id} + '.jpg'}" alt="illustration de la pizza" />
+                            <img class="img_pizza" th:src="@{'/img/' + ${produit.urlimage}}" alt="illustration de la pizza" />
                         </td>
                         <td>
                             <!-- Formulaire pour supprimer le produit -->

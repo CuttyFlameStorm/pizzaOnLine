@@ -34,7 +34,7 @@
                             <td th:text="${commande.produit.nom}"></td>
                             <td th:text="${commande.produit.description}"></td>
                             <td>
-                                <img class="img_pizza" th:src="@{'/img/pizza' + ${commande.produit.id} + '.jpg'}" alt="illustration de la pizza" />
+                                <img class="img_pizza" th:src="@{'/img/' + ${produit.urlimage}}" alt="illustration de la pizza" />
                             </td>
                             <td>
                                 <form th:action="@{/panier/supprimerdupanier}" method="POST">
