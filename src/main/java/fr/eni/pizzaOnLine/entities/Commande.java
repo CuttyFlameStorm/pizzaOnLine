@@ -3,8 +3,18 @@ package fr.eni.pizzaOnLine.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
+@Entity
 public class Commande implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id @GeneratedValue
 	private Long id;
 	private Date dateHeureLivraison;
 	private Date dateHeurePreparation;

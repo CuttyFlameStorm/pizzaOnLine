@@ -12,7 +12,7 @@ public class HomeController {
 	public String redirectionAccueil() {
 		
 		
-		return "commander";
+		return "redirect:/commander";
 	}
 	
 }
