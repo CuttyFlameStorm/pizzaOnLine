@@ -19,7 +19,7 @@
                 <div class="alert alert-success" role="alert">
                     <h2>Merci pour votre commande !</h2>
                     <p>Votre commande a été validée avec succès.</p>
-                    <p>vos pizza son actuellement en préparation, elle vous seront livré approximativement vers : </p>
+                    <p>vos pizza son actuellement en préparation, elle vous seront livré approximativement vers : <span class="big_heure_Livraison" th:text="${#temporals.format(heureLivraison, 'HH:mm')}"></span> </p>
                 </div>
                 <a th:href="@{/commander}" class="btn btn-primary">Retour à la liste des commandes</a>
             </div>

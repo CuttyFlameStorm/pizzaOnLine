@@ -36,6 +36,13 @@ a {
     cursor: pointer;
     border-radius: 8px;
 }
+.big_heure_Livraison{
+    padding: 10px;
+    font-size: 55px;
+    color: yellowgreen;
+    background-color: black;
+    border-radius: 8px;
+}
 
 .green_word {
     color: greenyellow;
