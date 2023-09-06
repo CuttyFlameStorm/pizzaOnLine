@@ -31,7 +31,8 @@ public class AdminController {
 	@Autowired
 	private TypeProduitRepository typeProduitRepo;
 	
-	private String Messagesaved = "produit ajouté avec succès";
+	private String Messagesaved = null;
+	
 	 @ModelAttribute("Messagesaved")
 	    public String getMessagesaved() {
 	        return Messagesaved;
@@ -48,10 +49,12 @@ public class AdminController {
 	@PostMapping("/ajouterPizza")
 	public String ajouterTraitement(
 	        @ModelAttribute Produit produit,
+	        
 	        Model model) {
 		
 //		produitService.sauvegarderProduit(produit);
 		produitRepo.save(produit);
+		Messagesaved = "Votre produit a été ajouté avec succès";
 		model.addAttribute("Messagesaved", getMessagesaved() );
 		model.addAttribute("produit", new Produit() );
 		return "redirect:/carte";
@@ -62,6 +65,7 @@ public class AdminController {
 	@PostMapping("/supprimerpizza")
 	public String supprimerPizza(@RequestParam("id") Long id, Model model) {
 	    produitRepo.deleteById(id);
+	    Messagesaved = "Votre produit a été supprimé de la liste";
 	    model.addAttribute("Messagesaved", getMessagesaved());
 	    return "redirect:/carte";
 	}
@@ -71,6 +75,7 @@ public class AdminController {
         Optional<Produit> produitOptional = produitRepo.findById(id);
         if (produitOptional.isPresent()) {
             Produit produit = produitOptional.get();
+            Messagesaved = "Votre produit a été modifié avec succès";
             model.addAttribute("produit", produit);
             return "modifierPizza"; //  page Thymeleaf pour la modification (modifierPizza.html)
         } else {
