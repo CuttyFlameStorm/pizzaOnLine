@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import fr.eni.pizzaOnLine.dao.ProduitRepository;
 import fr.eni.pizzaOnLine.dao.TypeProduitRepository;
 import fr.eni.pizzaOnLine.entities.Produit;
-import fr.eni.pizzaOnLine.service.ProduitService;
+
 
 
 
@@ -25,8 +25,7 @@ import fr.eni.pizzaOnLine.service.ProduitService;
 public class AdminController {
 
 
-	@Autowired
-	private ProduitService produitService;
+
 	@Autowired
 	private ProduitRepository produitRepo;
 	@Autowired
