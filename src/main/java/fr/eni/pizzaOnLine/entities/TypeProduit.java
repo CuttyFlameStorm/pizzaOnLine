@@ -23,10 +23,5 @@ public class TypeProduit implements Serializable {
 	private Integer id;
 	private String libelle;
 	
-
-	
-	
-	
-	
 	
 }
