@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.eni.pizzaOnLine.dao.DetailCommandeRepository;
 import fr.eni.pizzaOnLine.dao.ProduitRepository;
@@ -25,6 +27,8 @@ public class PanierController {
     @Autowired
     private DetailCommandeRepository detailCommandeRepository;
     
+    private static final Logger logger = LoggerFactory.getLogger(PanierController.class);
+    
     @GetMapping
     public String afficherPanier(Model model) {
         List<DetailCommande> produitsDansPanier = detailCommandeRepository.findAll();
@@ -34,6 +38,8 @@ public class PanierController {
 
     @PostMapping("/ajouter")
     public String ajouterProduitAuPanier(@RequestParam("produitId") Long produitId) {
+    	logger.info(" Entrée dans la méthode ajouterProduitAuPanier "); //s'affiche dans la console de log
+//    	logger.debug(" Entrée dans la méthode ajouterProduitAuPanier "); // ne s'affiche que pour debugger
         Optional<Produit> produitOptional = produitRepository.findById(produitId);
 
         if (produitOptional.isPresent()) {
@@ -41,10 +47,12 @@ public class PanierController {
             DetailCommande detailCommande = new DetailCommande();
             detailCommande.setProduit(produit);
             detailCommandeRepository.save(detailCommande);
+            logger.info("Nom du produit ajouter : {}", produit.getNom());//s'affiche dans la console de log
+//            logger.info("Nom du produit ajouter : {}", produit.getNom());  //ne s'affichera que lors de debug
         } else {
             return "erreurpage";
         }
-
+        
         return "redirect:/commander";
     }
 
