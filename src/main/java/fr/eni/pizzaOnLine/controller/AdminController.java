@@ -41,8 +41,10 @@ public class AdminController {
 	
 	@GetMapping
 	public String ajotuerPizzaForm(Model model) {
+		
 		model.addAttribute("produit", new Produit() );
-		model.addAttribute("produits", produitRepo.findAll());	
+		model.addAttribute("produits", produitRepo.findAll());
+		model.addAttribute("types", typeProduitRepo.findAll());
 		return "carte";
 	}
 

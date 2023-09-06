@@ -31,10 +31,18 @@
             <div class="col-8 offset-2">
                 <form th:action="@{/carte/ajouterPizza}" method="POST" th:object="${produit}" >
                     
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="typeProduit" class="form-label" >type de produit</label>
                         <input type="text" class="form-control" id="typeProduit" th:field="*{typeProduit}" >
+                    </div> -->
+                    <div class="mb-3">
+                        <label for="typeProduit" class="form-label">Type de produit</label>
+                        <select class="form-select" id="typeProduit" th:field="*{typeProduit}">
+                            <option value="" disabled selected>Sélectionnez un type</option>
+                            <option th:each="type : ${types}" th:value="${type.id}" th:text="${type.libelle}"></option>
+                        </select>
                     </div>
+                    
                    
                     <div class="mb-3">
                         <label for="nom" class="form-label" >Nom de la nouvelle Pizza</label>
