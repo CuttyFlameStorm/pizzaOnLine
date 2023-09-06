@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.eni.pizzaOnLine.dao.ProduitRepository;
+import fr.eni.pizzaOnLine.dao.TypeProduitRepository;
 import fr.eni.pizzaOnLine.entities.Produit;
 import fr.eni.pizzaOnLine.service.ProduitService;
 
@@ -28,6 +29,8 @@ public class AdminController {
 	private ProduitService produitService;
 	@Autowired
 	private ProduitRepository produitRepo;
+	@Autowired
+	private TypeProduitRepository typeProduitRepo;
 	
 	private String Messagesaved = "produit ajouté avec succès";
 	 @ModelAttribute("Messagesaved")
@@ -39,7 +42,7 @@ public class AdminController {
 	@GetMapping
 	public String ajotuerPizzaForm(Model model) {
 		model.addAttribute("produit", new Produit() );
-		model.addAttribute("produits", produitService.consulterProduits());	
+		model.addAttribute("produits", produitRepo.findAll());	
 		return "carte";
 	}
 

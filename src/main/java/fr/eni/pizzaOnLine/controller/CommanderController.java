@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import fr.eni.pizzaOnLine.dao.DetailCommandeRepository;
-import fr.eni.pizzaOnLine.dao.ProduitRepository;
 import fr.eni.pizzaOnLine.entities.DetailCommande;
 import fr.eni.pizzaOnLine.service.ProduitService;
 
