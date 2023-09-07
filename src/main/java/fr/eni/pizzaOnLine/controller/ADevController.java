@@ -8,8 +8,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import fr.eni.pizzaOnLine.dao.RoleRepository;
 import fr.eni.pizzaOnLine.dao.TypeProduitRepository;
+import fr.eni.pizzaOnLine.dao.UtilisateurRepository;
+import fr.eni.pizzaOnLine.entities.Role;
 import fr.eni.pizzaOnLine.entities.TypeProduit;
+import fr.eni.pizzaOnLine.entities.Utilisateur;
 
 
 @Controller
@@ -27,6 +31,10 @@ public class ADevController {
 //	private ProduitRepository produitRepo;
 	@Autowired
 	private TypeProduitRepository typeProduitRepository;
+	@Autowired
+	private UtilisateurRepository utilisateurRepository;
+	@Autowired
+	private RoleRepository roleRepository;
 	
 
 	
@@ -34,6 +42,8 @@ public class ADevController {
 	public String gestionTypeProduit(Model model) {
 //		model.addAttribute("produit", new Produit() );
 		model.addAttribute("typeProduit", new TypeProduit());
+		model.addAttribute("utilisateur", new Utilisateur());
+		model.addAttribute("role", new Role());
 //		model.addAttribute("etat", new Etat());
 //		model.addAttribute("detailCommande", new DetailCommande());
 //		model.addAttribute("commande", new Commande());
@@ -45,6 +55,20 @@ public class ADevController {
 	public String createTypeProduit(@ModelAttribute TypeProduit typeProduit) {
 	    
 		typeProduitRepository.save(typeProduit);
+	    
+	    return "redirect:/devadmin";
+	}
+	@PostMapping("/createUtilisateur")
+	public String createUtilisateur(@ModelAttribute Utilisateur utilisateur) {
+	    
+		utilisateurRepository.save(utilisateur);
+	    
+	    return "redirect:/devadmin";
+	}
+	@PostMapping("/createRole")
+	public String createRole(@ModelAttribute Role role) {
+	    
+		roleRepository.save(role);
 	    
 	    return "redirect:/devadmin";
 	}
