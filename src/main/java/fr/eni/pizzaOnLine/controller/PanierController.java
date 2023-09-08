@@ -48,7 +48,7 @@ public class PanierController {
             detailCommande.setProduit(produit);
             detailCommandeRepository.save(detailCommande);
             logger.info("Nom du produit ajouter : {}", produit.getNom());//s'affiche dans la console de log
-//            logger.info("Nom du produit ajouter : {}", produit.getNom());  //ne s'affichera que lors de debug
+//            logger.debug("Nom du produit ajouter : {}", produit.getNom());  //ne s'affichera que lors de debug
         } else {
             return "erreurpage";
         }

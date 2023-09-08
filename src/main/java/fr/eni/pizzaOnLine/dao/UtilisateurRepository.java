@@ -6,6 +6,7 @@ import fr.eni.pizzaOnLine.entities.Utilisateur;
 
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long>{
 
+	Utilisateur findByUsername(String username);
 	
 	
 }

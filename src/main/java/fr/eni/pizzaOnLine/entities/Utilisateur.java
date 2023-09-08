@@ -1,7 +1,12 @@
 package fr.eni.pizzaOnLine.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Collections;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor @AllArgsConstructor
 @Entity
-public class Utilisateur implements Serializable {
+public class Utilisateur implements UserDetails, Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -23,11 +28,56 @@ public class Utilisateur implements Serializable {
 	private Long id;
 	private String nom;
 	private String prenom;
-	private String email;
+	private String username;
 	private String motDePasse;
 	
 	@ManyToOne
 	private Role role;
+
+	
+
+	@Override
+	public String getPassword() {
+		
+		return motDePasse;
+	}
+
+	@Override
+	public String getUsername() {
+		
+		return username;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		
+		return true;
+	}
+
+	@Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // Vous devez retourner les rôles de l'utilisateur sous forme de GrantedAuthority
+        // Par exemple, en utilisant le rôle associé à l'utilisateur
+        return Collections.singletonList(new SimpleGrantedAuthority(role.getLibelle()));
+    }
 	
 	
 

@@ -1,5 +1,7 @@
 package fr.eni.pizzaOnLine.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,7 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import fr.eni.pizzaOnLine.dao.CommandeRepository;
+import fr.eni.pizzaOnLine.dao.DetailCommandeRepository;
+import fr.eni.pizzaOnLine.dao.EtatRepository;
+import fr.eni.pizzaOnLine.dao.ProduitRepository;
 import fr.eni.pizzaOnLine.dao.RoleRepository;
 import fr.eni.pizzaOnLine.dao.TypeProduitRepository;
 import fr.eni.pizzaOnLine.dao.UtilisateurRepository;
@@ -21,14 +28,14 @@ import fr.eni.pizzaOnLine.entities.Utilisateur;
 public class ADevController {
 
 	
-//	@Autowired
-//	private CommandeRepository commandeRepository;
-//	@Autowired
-//	private DetailCommandeRepository detailCommandeRepository;
-//	@Autowired
-//	private EtatRepository etatRepository;
-//	@Autowired
-//	private ProduitRepository produitRepo;
+	@Autowired
+	private CommandeRepository commandeRepository;
+	@Autowired
+	private DetailCommandeRepository detailCommandeRepository;
+	@Autowired
+	private EtatRepository etatRepository;
+	@Autowired
+	private ProduitRepository produitRepo;
 	@Autowired
 	private TypeProduitRepository typeProduitRepository;
 	@Autowired
@@ -47,6 +54,9 @@ public class ADevController {
 //		model.addAttribute("etat", new Etat());
 //		model.addAttribute("detailCommande", new DetailCommande());
 //		model.addAttribute("commande", new Commande());
+		List<Role> roles = roleRepository.findAll();
+	    model.addAttribute("roles", roles);
+		
 		return "dev_back_office";
 	}
 	
@@ -58,13 +68,26 @@ public class ADevController {
 	    
 	    return "redirect:/devadmin";
 	}
+	//--****---------------*****---------------******--------------
 	@PostMapping("/createUtilisateur")
-	public String createUtilisateur(@ModelAttribute Utilisateur utilisateur) {
-	    
-		utilisateurRepository.save(utilisateur);
-	    
+	public String createUtilisateur(@ModelAttribute Utilisateur utilisateur, @RequestParam("role") Long roleId) {
+	    // Récupérez le rôle à partir de l'ID
+	    Role role = roleRepository.findById(roleId).orElse(null);
+
+	    if (role != null) {
+	        // Associez le rôle à l'utilisateur
+	        utilisateur.setRole(role);
+	        
+	        // Sauvegardez l'utilisateur avec le rôle
+	        utilisateurRepository.save(utilisateur);
+	    } else {
+	        return "erreurpage";
+	    }
+
 	    return "redirect:/devadmin";
 	}
+
+	//--****---------------*****---------------******--------------
 	@PostMapping("/createRole")
 	public String createRole(@ModelAttribute Role role) {
 	    
