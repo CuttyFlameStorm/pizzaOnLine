@@ -1,12 +1,12 @@
 package fr.eni.pizzaOnLine.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -15,10 +15,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-	 @Bean
+
+	@Bean
 	    public PasswordEncoder PasswordEncoder() {
-	        return NoOpPasswordEncoder.getInstance(); // Pour simplifier, n'utilisez pas NoOpPasswordEncoder en production
-	        // return new BCryptPasswordEncoder();
+	        //return NoOpPasswordEncoder.getInstance(); // Pour simplifier, n'utilisez pas NoOpPasswordEncoder en production
+	         return new BCryptPasswordEncoder();
 	    }
 	
 //		@Override
@@ -52,6 +53,7 @@ public class SecurityConfig {
 					.requestMatchers("/preparation/**").hasAnyAuthority("Livreur","Pizzaiolo")
 //						.requestMatchers("/carte/**","/preparation/**").hasAnyAuthority("Gerant")
 					.anyRequest().hasAnyAuthority("Gerant")
+					
 			)
 			.formLogin(Customizer.withDefaults())
 			.logout((logout)->logout.permitAll());

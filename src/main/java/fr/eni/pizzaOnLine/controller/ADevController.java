@@ -3,6 +3,7 @@ package fr.eni.pizzaOnLine.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +44,9 @@ public class ADevController {
 	@Autowired
 	private RoleRepository roleRepository;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 
 	
 	@GetMapping
@@ -70,8 +74,13 @@ public class ADevController {
 	}
 	//--****---------------*****---------------******--------------
 	@PostMapping("/createUtilisateur")
-	public String createUtilisateur(@ModelAttribute Utilisateur utilisateur, @RequestParam("role") Long roleId) {
-	    // Récupérez le rôle à partir de l'ID
+	public String createUtilisateur(@ModelAttribute Utilisateur utilisateur, @RequestParam("role") Long roleId, @RequestParam String motDePasse) {
+	    // ...  
+		// Encodez le mot de passe avec BCryptPasswordEncoder
+	    String encodedPassword = passwordEncoder.encode(motDePasse);
+	    utilisateur.setMotDePasse(encodedPassword);
+		
+		// Récupérez le rôle à partir de l'ID
 	    Role role = roleRepository.findById(roleId).orElse(null);
 
 	    if (role != null) {
